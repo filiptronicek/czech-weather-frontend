@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Chart using XML Data</title>
 </script>
 </head>
 <body>
+<h1>
+    <label for="cars">Today's weather in </label>
+    <select name="city" id="city" onchange="updateStats()">
+      <option value="praha" default>Prague</option>
+      <option value="brno">Brno</option>
+      <option value="ceske_budejovice">České Budějovice</option>
+      <option value="hradec_kralove">Hradec Králové</option>
+      <option value="jihlava">Jihlava</option>
+      <option value="karlovy_vary">Karlovy Vary</option>>
+      <option value="liberec">Liberec</option>
+      <option value="olomouc">Olomouc</option>
+      <option value="ostrava">Ostrava</option>
+      <option value="pardubice">Pradubice</option>
+      <option value="plzen">Plzeň</option>
+      <option value="usti_nad_labem">Ústí nad Labem</option>
+      <option value="zlin">Zlín</option>
+    </select>
+
+</h1>
 	<div id="chart"></div>
 </body>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

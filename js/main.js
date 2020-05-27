@@ -1,10 +1,23 @@
+function getRandomColor() { // https://stackoverflow.com/a/1484514/10199319
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
 function updateStats() {
+  const chartDiv = document.querySelector("#chart");
+  chartDiv.innerHTML = "";
+  const city = document.getElementById("city").value;
   const today = moment().subtract(0, "days").format("YYYY.MM.DD");
   $.get(
-    `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/praha/${today}.csv`,
+    `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/${city}/${today}.csv`,
     function (data) {
       const lddPoints = getDataPointsFromCSV(data);
-      let xs = []; let ys = [];
+      let xs = [];
+      let ys = [];
       for (let i of lddPoints) {
         xs.push(i.x);
         ys.push(i.y);
@@ -13,7 +26,7 @@ function updateStats() {
       const options = {
         series: [
           {
-            name: "Degrees",
+            name: "°C",
             data: ys,
           },
         ],
@@ -24,15 +37,15 @@ function updateStats() {
             enabled: true,
           },
         },
+        colors: [getRandomColor()],
         dataLabels: {
           enabled: false,
         },
         stroke: {
-          curve: "straight",
+          curve: "smooth",
         },
         title: {
-          text: "Today's weather",
-          align: "left",
+          align: "center",
         },
         grid: {
           row: {
@@ -45,7 +58,7 @@ function updateStats() {
         },
       };
 
-      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      var chart = new ApexCharts(chartDiv, options);
       chart.render();
     }
   );
@@ -66,9 +79,9 @@ function getDataPointsFromCSV(csv) {
         });
       } else if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
         dataPoints.push({
-            x: parseFloat(points[0]) + offset + ":30",
-            y: parseFloat(points[3]),
-          });
+          x: parseFloat(points[0]) + offset + ":30",
+          y: parseFloat(points[3]),
+        });
       }
     }
   return dataPoints;
