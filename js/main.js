@@ -9,6 +9,7 @@ function updateStats() {
         xs.push(i.x);
         ys.push(i.y);
       }
+      console.table(lddPoints);
       const options = {
         series: [
           {
