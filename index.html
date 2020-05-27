@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>
-    <label for="cars">Today's weather in </label>
+    <label for="city">Today's weather in </label>
     <select name="city" id="city" onchange="updateStats()">
       <option value="praha" default>Prague</option>
       <option value="brno">Brno</option>
@@ -28,6 +28,14 @@
     </select>
 
 </h1>
+<div class="stat" style="float: right; margin-right: 50px;">
+    <select name="stat" id="stat" onchange="updateStats()">
+      <option value="temp" default>Temperature</option>
+      <option value="wind">Wind Speed</option>
+      <option value="humidity">Humidity</option>
+
+    </select>
+</div>
 	<div id="chart"></div>
 </body>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

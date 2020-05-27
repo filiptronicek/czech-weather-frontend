@@ -1,21 +1,43 @@
-function getRandomColor() { // https://stackoverflow.com/a/1484514/10199319
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+function getRandomColor() {
+  // https://stackoverflow.com/a/1484514/10199319
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
   }
+  return color;
+}
 
 function updateStats() {
   const chartDiv = document.querySelector("#chart");
   chartDiv.innerHTML = "";
   const city = document.getElementById("city").value;
   const today = moment().subtract(0, "days").format("YYYY.MM.DD");
+
+  const m = document.getElementById("stat").value;
+
+  let metric;
+  let lbl;
+  let unit;
+
+  if (m === "temp") {
+    metric = 3;
+    lbl = "Temperature";
+    unit = "°C";
+  } else if (m === "humidity") {
+    metric = 2;
+    lbl = "Humidity";
+    unit = "%";
+  } else if (m === "wind") {
+    metric = 1;
+    lbl = "Wind Speed";
+    unit = "m/s";
+  }
+
   $.get(
     `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/${city}/${today}.csv`,
     function (data) {
-      const lddPoints = getDataPointsFromCSV(data);
+      const lddPoints = getDataPointsFromCSV(data, metric);
       let xs = [];
       let ys = [];
       for (let i of lddPoints) {
@@ -26,7 +48,7 @@ function updateStats() {
       const options = {
         series: [
           {
-            name: "Temperature",
+            name: lbl,
             data: ys,
           },
         ],
@@ -34,7 +56,7 @@ function updateStats() {
           height: 350,
           type: "line",
           zoom: {
-              type: 'x',
+            type: "x",
             enabled: true,
             autoScaleYaxis: true,
           },
@@ -56,17 +78,17 @@ function updateStats() {
           },
         },
         yaxis: {
-            labels: {
-                formatter: function(val) {
-                    return val+"°C";
-                }
-            }
+          labels: {
+            formatter: function (val) {
+              return val + unit;
+            },
+          },
         },
         xaxis: {
           categories: xs,
-            title: {
-                text: "Time"
-            }
+          title: {
+            text: "Time",
+          },
         },
       };
 
@@ -76,23 +98,25 @@ function updateStats() {
   );
 }
 
-function getDataPointsFromCSV(csv) {
+function getDataPointsFromCSV(csv, metric) {
   const dataPoints = (csvLines = points = []);
   csvLines = csv.split(/[\r?\n|\r|\n]+/);
+
   const tz = moment.tz("Europe/Prague");
   const offset = (tz.utcOffset() - (tz.utcOffset() % 60)) / 60;
+
   for (let i = 0; i < csvLines.length; i++)
     if (csvLines[i].length > 0) {
       points = csvLines[i].split(",");
       if (i % 2 === 1 && parseFloat(points[0]) + offset < 25) {
         dataPoints.push({
-          x: parseFloat(points[0]) + offset+":00",
-          y: parseFloat(points[3]),
+          x: parseFloat(points[0]) + offset + ":00",
+          y: parseFloat(points[metric]),
         });
       } else if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
         dataPoints.push({
           x: parseFloat(points[0]) + offset + ":30",
-          y: parseFloat(points[3]),
+          y: parseFloat(points[metric]),
         });
       }
     }
