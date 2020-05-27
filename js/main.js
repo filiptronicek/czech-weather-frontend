@@ -74,7 +74,7 @@ function getDataPointsFromCSV(csv) {
       points = csvLines[i].split(",");
       if (i % 2 === 1 && parseFloat(points[0]) + offset < 25) {
         dataPoints.push({
-          x: parseFloat(points[0]) + offset,
+          x: parseFloat(points[0]) + offset+":00",
           y: parseFloat(points[3]),
         });
       } else if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
