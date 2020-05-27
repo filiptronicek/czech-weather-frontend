@@ -9,7 +9,7 @@ function updateStats() {
         xs.push(i.x);
         ys.push(i.y);
       }
-      console.table(lddPoints);
+      console.table(xs);
       const options = {
         series: [
           {
@@ -59,11 +59,16 @@ function getDataPointsFromCSV(csv) {
   for (let i = 0; i < csvLines.length; i++)
     if (csvLines[i].length > 0) {
       points = csvLines[i].split(",");
-      if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
+      if (i % 2 === 1 && parseFloat(points[0]) + offset < 25) {
         dataPoints.push({
           x: parseFloat(points[0]) + offset,
           y: parseFloat(points[3]),
         });
+      } else if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
+        dataPoints.push({
+            x: parseFloat(points[0]) + offset + ":30",
+            y: parseFloat(points[3]),
+          });
       }
     }
   return dataPoints;
