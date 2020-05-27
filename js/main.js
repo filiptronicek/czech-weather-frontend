@@ -4,8 +4,7 @@ function updateStats() {
     `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/praha/${today}.csv`,
     function (data) {
       const lddPoints = getDataPointsFromCSV(data);
-      let xs = [];
-      let ys = [];
+      let xs = []; let ys = [];
       for (let i of lddPoints) {
         xs.push(i.x);
         ys.push(i.y);
@@ -21,7 +20,7 @@ function updateStats() {
           height: 350,
           type: "line",
           zoom: {
-            enabled: false,
+            enabled: true,
           },
         },
         dataLabels: {
