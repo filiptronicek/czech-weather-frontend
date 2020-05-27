@@ -1,7 +1,7 @@
 function getRandomColor() { // https://stackoverflow.com/a/1484514/10199319
     const letters = '0123456789ABCDEF';
     let color = '#';
-    for (var i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
@@ -26,7 +26,7 @@ function updateStats() {
       const options = {
         series: [
           {
-            name: "°C",
+            name: "Temperature",
             data: ys,
           },
         ],
@@ -34,12 +34,14 @@ function updateStats() {
           height: 350,
           type: "line",
           zoom: {
+              type: 'x',
             enabled: true,
+            autoScaleYaxis: true,
           },
         },
         colors: [getRandomColor()],
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
         stroke: {
           curve: "smooth",
@@ -53,12 +55,22 @@ function updateStats() {
             opacity: 0.5,
           },
         },
+        yaxis: {
+            labels: {
+                formatter: function(val) {
+                    return val+"°C";
+                }
+            }
+        },
         xaxis: {
           categories: xs,
+            title: {
+                text: "Time"
+            }
         },
       };
 
-      var chart = new ApexCharts(chartDiv, options);
+      const chart = new ApexCharts(chartDiv, options);
       chart.render();
     }
   );
