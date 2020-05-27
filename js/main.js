@@ -44,7 +44,6 @@ function updateStats() {
         xs.push(i.x);
         ys.push(i.y);
       }
-      console.table(xs);
       const options = {
         series: [
           {
