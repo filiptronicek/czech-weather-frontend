@@ -80,7 +80,7 @@ function updateStats() {
         yaxis: {
           labels: {
             formatter: function (val) {
-              return val + unit;
+              return Number.parseFloat(val).toFixed(2) + unit;
             },
           },
         },
