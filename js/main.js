@@ -35,7 +35,7 @@ function updateStats() {
   }
 
   const url =
-    "https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/${city}/${today}.csv";
+    `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/${city}/${today}.csv`;
 
   $.get(url, function (data) {
     const lddPoints = getDataPointsFromCSV(data, metric);
