@@ -12,7 +12,7 @@ function updateStats() {
   const chartDiv = document.querySelector("#chart");
   chartDiv.innerHTML = "";
   const city = document.getElementById("city").value;
-  const today = moment().subtract(0, "days").format("YYYY.MM.DD");
+  const today = moment().subtract(1, "days").format("YYYY.MM.DD");
 
   const m = document.getElementById("stat").value;
 
@@ -44,12 +44,45 @@ function updateStats() {
         xs.push(i.x);
         ys.push(i.y);
       }
+      console.log("Formatted outputs: ");
+      const filteredy = ys.filter(function (value, index, ar) {
+        return (index % 2 == 0);
+      });
+      const filteredx = xs.filter(function (value, index, ar) {
+        return (index % 2 == 0);
+      });
+
       const options = {
         series: [
           {
             name: lbl,
             data: ys,
           },
+        ],
+        responsive: [
+          {
+            breakpoint: 1000,
+            options: {
+              dataLabels: {
+                 enabled: false
+              },
+              series: [
+                {
+                  data: filteredy,
+                  labels: lbl
+                },
+              ],
+                xaxis: {
+                  categories: filteredx,
+                  title: {
+                    text: "Time",
+                  }
+                  },
+              legend: {
+                position: "bottom"
+              }
+            }
+          }
         ],
         chart: {
           height: 350,
