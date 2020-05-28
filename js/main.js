@@ -32,10 +32,21 @@ function updateStats() {
     metric = 1;
     lbl = "Wind Speed";
     unit = "m/s";
+  } else if (m === "rain") {
+    metric = 5;
+    lbl = "Precipitation";
+    unit = "%";
+  } else if (m === "pressure") {
+    metric = 4;
+    lbl = "Pressure";
+    unit = "hPa";
+  } else if (m === "clouds") {
+    metric = 7;
+    unit = "Cloud coverage";
+    unit = "%";
   }
 
-  const url =
-    `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/${city}/${today}.csv`;
+  const url = `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/${city}/${today}.csv`;
 
   $.get(url, function (data) {
     const lddPoints = getDataPointsFromCSV(data, metric);
@@ -148,7 +159,7 @@ function getDataPointsFromCSV(csv, metric) {
       } else if (
         i % 2 === 0 &&
         parseFloat(points[0]) + offset < 25 &&
-        csvLines.length < 24
+        csvLines.length < 36
       ) {
         dataPoints.push({
           x: parseFloat(points[0]) + offset + ":30",
