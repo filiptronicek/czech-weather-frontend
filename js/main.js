@@ -12,7 +12,7 @@ function updateStats() {
   const chartDiv = document.querySelector("#chart");
   chartDiv.innerHTML = "";
   const city = document.getElementById("city").value;
-  const today = moment().subtract(1, "days").format("YYYY.MM.DD");
+  const today = moment().subtract(0, "days").format("YYYY.MM.DD");
 
   const m = document.getElementById("stat").value;
 
