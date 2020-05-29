@@ -151,13 +151,13 @@ function getDataPointsFromCSV(csv, metric) {
   for (let i = 0; i < csvLines.length; i++)
     if (csvLines[i].length > 0) {
       points = csvLines[i].split(",");
-      if (i % 2 === 1 && parseFloat(points[0]) + offset < 25) {
+      if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
         dataPoints.push({
           x: parseFloat(points[0]) + offset + ":00",
           y: parseFloat(points[metric]),
         });
       } else if (
-        i % 2 === 0 &&
+        i % 2 === 1 &&
         parseFloat(points[0]) + offset < 25 &&
         csvLines.length < 36
       ) {
