@@ -20,30 +20,37 @@ function updateStats() {
   let lbl;
   let unit;
 
-  if (m === "temp") {
-    metric = 3;
-    lbl = "Temperature";
-    unit = "°C";
-  } else if (m === "humidity") {
-    metric = 2;
-    lbl = "Humidity";
-    unit = "%";
-  } else if (m === "wind") {
-    metric = 1;
-    lbl = "Wind Speed";
-    unit = "m/s";
-  } else if (m === "rain") {
-    metric = 5;
-    lbl = "Precipitation";
-    unit = "%";
-  } else if (m === "pressure") {
-    metric = 4;
-    lbl = "Pressure";
-    unit = "hPa";
-  } else if (m === "clouds") {
-    metric = 7;
-    unit = "Cloud coverage";
-    unit = "%";
+  switch (m) {
+    case "temp":
+      metric = 3;
+      lbl = "Temperature";
+      unit = "°C";
+      break;
+    case "humidity":
+      metric = 2;
+      lbl = "Humidity";
+      unit = "%";
+      break;
+    case "wind":
+      metric = 1;
+      lbl = "Wind Speed";
+      unit = "m/s";
+      break;
+    case "rain":
+      metric = 5;
+      lbl = "Precipitation";
+      unit = "%";
+      break;
+    case "pressure":
+      metric = 4;
+      lbl = "Pressure";
+      unit = "hPa";
+      break;
+    case "clouds":
+      metric = 7;
+      unit = "Cloud coverage";
+      unit = "%";
+      break;
   }
 
   const url = `https://raw.githubusercontent.com/filiptronicek/czech-weather/master/data/${city}/${today}.csv`;
