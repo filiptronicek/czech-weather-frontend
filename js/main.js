@@ -153,7 +153,7 @@ function getDataPointsFromCSV(csv, metric) {
       points = csvLines[i].split(",");
       if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
         dataPoints.push({
-          x: parseFloat(points[0]) + offset + ":00",
+          x: parseFloat(points[0]) + offset + ":30",
           y: parseFloat(points[metric]),
         });
       } else if (
@@ -162,7 +162,7 @@ function getDataPointsFromCSV(csv, metric) {
         csvLines.length < 36
       ) {
         dataPoints.push({
-          x: parseFloat(points[0]) + offset + ":30",
+          x: parseFloat(points[0]) + offset + ":00",
           y: parseFloat(points[metric]),
         });
       }
