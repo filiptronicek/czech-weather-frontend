@@ -36,11 +36,17 @@
       <option value="rain">Rain</option>
       <option value="pressure">Pressure</option>
       <option value="clouds">Cloud coverage</option>
-
     </select>
 </div>
 	<div id="chart"></div>
 </body>
+<div class="stat" style="float: left;">
+  <select name="date" id="date" onchange="updateStats()">
+    <option value="0" default>Today</option>
+    <option value="1">Yesterday</option>
+    <option value="2">2 days ago</option>
+  </select>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>

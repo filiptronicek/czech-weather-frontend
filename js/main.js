@@ -9,10 +9,11 @@ function getRandomColor() {
 }
 
 function updateStats() {
+  const datePic = document.getElementById("date").value;
   const chartDiv = document.querySelector("#chart");
   chartDiv.innerHTML = "";
   const city = document.getElementById("city").value;
-  const today = moment().subtract(0, "days").format("YYYY.MM.DD");
+  const today = moment().subtract(datePic, "days").format("YYYY.MM.DD");
 
   const m = document.getElementById("stat").value;
 
@@ -158,15 +159,9 @@ function getDataPointsFromCSV(csv, metric) {
   for (let i = 0; i < csvLines.length; i++)
     if (csvLines[i].length > 0) {
       points = csvLines[i].split(",");
-      if (i % 2 === 0 && parseFloat(points[0]) + offset < 25) {
-        dataPoints.push({
-          x: parseFloat(points[0]) + offset + ":30",
-          y: parseFloat(points[metric]),
-        });
-      } else if (
-        i % 2 === 1 &&
-        parseFloat(points[0]) + offset < 25 &&
-        csvLines.length < 36
+    if (
+        i % 2 === 0 &&
+        parseFloat(points[0]) + offset < 25
       ) {
         dataPoints.push({
           x: parseFloat(points[0]) + offset + ":00",
