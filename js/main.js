@@ -22,30 +22,30 @@ function updateStats() {
   let unit;
 
   switch (m) {
-    case "temp":
-      metric = 3;
-      lbl = "Temperature";
-      unit = "°C";
+    case "wind":
+      metric = 1;
+      lbl = "Wind Speed";
+      unit = "m/s";
       break;
     case "humidity":
       metric = 2;
       lbl = "Humidity";
       unit = "%";
       break;
-    case "wind":
-      metric = 1;
-      lbl = "Wind Speed";
-      unit = "m/s";
-      break;
-    case "rain":
-      metric = 5;
-      lbl = "Precipitation";
-      unit = "%";
+    case "temp":
+      metric = 3;
+      lbl = "Temperature";
+      unit = "°C";
       break;
     case "pressure":
       metric = 4;
       lbl = "Pressure";
       unit = "hPa";
+      break;
+    case "rain":
+      metric = 5;
+      lbl = "Precipitation";
+      unit = "%";
       break;
     case "clouds":
       metric = 7;
