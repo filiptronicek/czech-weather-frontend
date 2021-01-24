@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
     <title>Weather charts</title>
 </script>
 </head>
@@ -28,7 +29,7 @@
     </select>
 
 </h1>
-<div class="stat" style="float: right;">
+<div class="stat">
     <select name="stat" id="stat" onchange="updateStats()">
       <option value="temp" default>Temperature</option>
       <option value="wind">Wind Speed</option>
@@ -41,13 +42,11 @@
 	<div id="chart"></div>
 </body>
 <div class="stat" style="float: left;">
-  <select name="date" id="date" onchange="updateStats()">
-    <option value="0" default>Today</option>
-    <option value="1">Yesterday</option>
-    <option value="2">2 days ago</option>
-  </select>
+    <input id="date" onchange="updateStats()" placeholder="Date (mm/dd/yyyy)" type="text"
+    class="center offset-l5 offset-s3 datepicker col l2 s6 text-darken-2" />
 </div>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/js-datepicker"></script>
 
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 

@@ -6,16 +6,19 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-  }
-#stat {
-    margin-right: 50px;
 }
-@media only screen and (max-width: 800px) {
+
+#stat {
+    margin-right: 85vw;
+}
+
+@media only screen and(max-width: 800px) {
     #chart {
-      width: 100%;
-      height: 50vh;
+        width: 100%;
+        height: 50vh;
     }
     #stat {
-        margin-right: 40vw;
+      position: absolute;
+      bottom: 0;
     }
-  }
+}
