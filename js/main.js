@@ -168,6 +168,8 @@ updateStats();
 const picker = datepicker(".datepicker", {
   maxDate: new Date(),
   minDate: new Date(2020, 4, 26),
+  showAllDates: true,
+  disableMobile: true,
   onSelect: (_instance, date) => {
     updateStats(moment(date.getTime()).format("YYYY.MM.DD"));
   }
